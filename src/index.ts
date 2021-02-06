@@ -1,8 +1,18 @@
 #!/usr/bin/env node
-
 import { GameState, GlobalEvent, MatchEvent, LanguageIso } from './types';
 import { parseGameState, parseGlobalEvent, parseMatchEvent } from './parsers';
 import { translate, Client } from './services';
+
+console.log("\x1b[32m", `
+_______  _______  _______  _______    _______  __   __  ______   ______   __   __ 
+|       ||       ||       ||       |  |  _    ||  | |  ||      | |      | |  | |  |
+|       ||  _____||    ___||   _   |  | |_|   ||  | |  ||  _    ||  _    ||  |_|  |
+|       || |_____ |   | __ |  | |  |  |       ||  |_|  || | |   || | |   ||       |
+|      _||_____  ||   ||  ||  |_|  |  |  _   | |       || |_|   || |_|   ||_     _|
+|     |_  _____| ||   |_| ||       |  | |_|   ||       ||       ||       |  |   |  
+|_______||_______||_______||_______|  |_______||_______||______| |______|   |___|  
+`);
+
 
 const skipLanguages = [
   LanguageIso.English,
