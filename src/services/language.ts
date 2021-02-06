@@ -1,14 +1,7 @@
-import languagedetect from 'languagedetect';
-const langDetector = new languagedetect();
+const langDetect = require('langdetect');
 
 export function detectLanguage(text: string): string | null {
-  let result = null;
-  const detectionResult = langDetector.detect(text, 1);
-
-  if (detectionResult.length > 0) {
-    const [language, float] = detectionResult[0];
-    result = language;
-  }
-
+  const detectionResult = langDetect.detect(text);
+  const result = detectionResult.length > 0 ? detectionResult[0].lang : null;
   return result;
 }

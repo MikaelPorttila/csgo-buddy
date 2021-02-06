@@ -1,4 +1,4 @@
-export enum GameUiState {
+export enum GameState {
   Initial = '',
   Unknown = 'Unknown',
   Match = 'CSGO_GAME_UI_STATE_INGAME',

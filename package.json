@@ -4,7 +4,7 @@
   "description": "A buddy for csgo",
   "main": "src/index.ts",
   "dependencies": {
-    "languagedetect": "^2.0.0"
+    "langdetect": "^0.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7",

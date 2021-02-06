@@ -1,17 +1,17 @@
-import { GameUiState } from '../types';
+import { GameState } from '../types';
 
-export function parseGameState(message: string): GameUiState {
+export function parseGameState(message: string): GameState {
   const split = message.split('->');
   switch(split[1].trim()) {
-    case GameUiState.Match:
-      return GameUiState.Match;
-    case GameUiState.LoadingScreen:
-      return GameUiState.LoadingScreen;
-    case GameUiState.MainMenu:
-      return GameUiState.MainMenu;
-    case GameUiState.PauseMenu:
-      return GameUiState.PauseMenu;
+    case GameState.Match:
+      return GameState.Match;
+    case GameState.LoadingScreen:
+      return GameState.LoadingScreen;
+    case GameState.MainMenu:
+      return GameState.MainMenu;
+    case GameState.PauseMenu:
+      return GameState.PauseMenu;
     default:
-      return GameUiState.Unknown;
+      return GameState.Unknown;
   }
 }
