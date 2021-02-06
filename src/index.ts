@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { GameState, GlobalEvent, MatchEvent, LanguageIso } from './types';
 import { parseGameState, parseGlobalEvent, parseMatchEvent } from './parsers';
 import { translate, Client } from './services';
@@ -12,8 +14,8 @@ const skipLanguages = [
 let gameState = GameState.Initial;
 let playerNames = [];
 
-// TODO (MIKAEL): port and/or host as parameters.
-const client = new Client(1338, '127.0.0.1');
+// TODO: port and/or host as parameters.
+const client = new Client(1337, '127.0.0.1');
 client.addListener(async (message: string) => {
   switch (parseGlobalEvent(message)) {
     case GlobalEvent.GameStateChanged:
@@ -46,15 +48,15 @@ client.addListener(async (message: string) => {
               }
               break;
             case MatchEvent.PlayerConnected:
-              // todo (MIKAEL): Do something fun with this.
+              // todo: Do something fun with this.
               // console.log('player connected:', matchEvent.value);
               break;
             case MatchEvent.PlayerDisconnected:
-              // todo (MIKAEL): Do something fun with this.
+              // todo: Do something fun with this.
               // console.log('Player disconnected:', matchEvent.value);
               break;
             default:
-              // todo (MIKAEL): Handle unmapped match events
+              // todo: Handle unmapped match events
               break;
           }
           break;

@@ -9,9 +9,9 @@ Node application that talks and listens to source engine games
 ```
 
 ## Run
-``` shell
-npx csgo-buddy
-```
+1. Clone repo
+2. Run npm install
+3. run npm start
 
 Features:
  - Translate chat 

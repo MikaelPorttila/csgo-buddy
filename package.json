@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "nodemon",
-    "build": "esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js",
+    "build": "esbuild ./src/index.ts --bundle --platform=node --outfile=bin/index.js",
     "test": "test"
   },
   "repository": {
