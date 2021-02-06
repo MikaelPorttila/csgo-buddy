@@ -1,12 +1,19 @@
-import { GameState, GlobalEvent, MatchEvent, Language } from './types';
+import { GameState, GlobalEvent, MatchEvent, LanguageIso } from './types';
 import { parseGameState, parseGlobalEvent, parseMatchEvent } from './parsers';
-import { translate, detectLanguage, Client } from './services';
+import { translate, Client } from './services';
+
+const skipLanguages = [
+  LanguageIso.English,
+  LanguageIso.Swedish,
+  LanguageIso.Danish,
+  LanguageIso.Norwegian,
+];
 
 let gameState = GameState.Initial;
 let playerNames = [];
 
 const client = new Client(1338, '127.0.0.1');
-client.addListener((message: string) => {
+client.addListener(async (message: string) => {
   switch (parseGlobalEvent(message)) {
     case GlobalEvent.GameStateChanged:
       gameState = parseGameState(message);
@@ -19,19 +26,9 @@ client.addListener((message: string) => {
           switch (matchEvent.event) {
             case MatchEvent.Message:
               const [playerName, playerMessage] = matchEvent.value;
-              const language = detectLanguage(playerMessage);
-
-              switch (language) {
-                case Language.Ruski:
-                  translate('en', playerMessage).then((translatedMessage) => {
-                    console.log(
-                      'translated:',
-                      playerMessage,
-                      'to:',
-                      translatedMessage
-                    );
-                  });
-                  break;
+              const translation = await translate(LanguageIso.English, playerMessage);
+              if(translation && !skipLanguages.some(lang => lang === translation.language)) {
+                console.log('Translation', playerName, translation.text);
               }
               break;
             case MatchEvent.PlayerConnected:
