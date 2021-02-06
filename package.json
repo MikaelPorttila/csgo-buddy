@@ -1,6 +1,6 @@
 {
   "name": "csgo-buddy",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A buddy for csgo",
   "main": "./lib/index.js",
   "dependencies": {

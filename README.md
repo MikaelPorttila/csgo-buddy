@@ -9,6 +9,8 @@ Makes your favorite ESport title a little bit better.
 ```
 
 ## Run
+1. Start CSGO
+2. Run following in CMD
 ```
 npx csgo-buddy
 ```
