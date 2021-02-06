@@ -2,7 +2,7 @@
   "name": "csgo-buddy",
   "version": "1.0.0",
   "description": "A buddy for csgo",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "dependencies": {
     "langdetect": "^0.2.1"
   },
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "nodemon",
-    "build": "esbuild ./src/index.ts",
+    "build": "esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js",
     "test": "test"
   },
   "repository": {
