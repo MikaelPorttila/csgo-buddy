@@ -1,3 +1,5 @@
+[![tag](https://img.shields.io/github/tag/MikaelPorttila/csgo-buddy.svg)](https://github.com/MikaelPorttila/csgo-buddy/releases)
+
 # CSGO Buddy
 Makes your favorite ESport title a little bit better. 
 
