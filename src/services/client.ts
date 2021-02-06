@@ -1,17 +1,27 @@
 import { Socket } from 'net';
 
 export class Client {
-  private socket: Socket; 
-
+  socket: Socket; 
+  connectionOpen: boolean;
+  
   constructor(
     private port: number,
     private host: string,) {
+      this.connectionOpen = false;
       this.socket = new Socket();
+      this.socket.addListener('error', () => {
+        this.connectionOpen = false;
+        console.error(
+          'Failed to connect to CSGO.',
+          `\nStart CSGO and make sure that you add launch option: -netconport ${this.port}`
+        );
+      });
     }
 
     connect(): Socket {
       console.log('Connecting...');
       return this.socket.connect(this.port, this.host, () => {
+        this.connectionOpen = true;
         console.log('Connected!');
       });
     }
