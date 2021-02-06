@@ -19,3 +19,6 @@ npx csgo-buddy
 
 Features:
  - Chat translation to English
+
+## Warning
+This buddy will mess with your developer echos.
