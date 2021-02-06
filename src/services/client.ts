@@ -16,8 +16,10 @@ export class Client {
       });
     }
 
-    send(message: string): void {
-      this.#socket.write(`${message}\r\n`);
+    send(...messages: string[]): void {
+      for(const message of messages) {
+        this.#socket.write(`${message}\r\n`);
+      }
     }
 
     addListener(handler: (message: string) => void): void {

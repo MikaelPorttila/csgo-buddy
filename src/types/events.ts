@@ -13,6 +13,7 @@ export enum LobbyEvent {
 
 export enum GlobalEvent {
   Unknown = '',
+  Message = ' : ',
   GameStateChanged = 'ChangeGameUIState',
 }
 
