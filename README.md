@@ -14,4 +14,4 @@ Node application that talks and listens to source engine games
 3. run npm start
 
 Features:
- - Translate chat 
+ - Chat translation to English
