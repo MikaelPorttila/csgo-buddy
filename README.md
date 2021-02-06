@@ -9,9 +9,9 @@ Makes your favorite ESport title a little bit better.
 ```
 
 ## Run
-1. Clone repo
-2. Run npm install
-3. run npm start
+```
+npx csgo-buddy
+```
 
 Features:
  - Chat translation to English
