@@ -26,7 +26,10 @@ export async function translate(
         translationCache[message] = result;
         resolve(result);
       });
-      res.on('error', () => reject());
+      res.on('error', () => {
+        console.log('failed to translate', message);
+        reject()
+      });
     });
   });
 }
