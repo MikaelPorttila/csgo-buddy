@@ -17,7 +17,6 @@ client.addListener(async (message: string) => {
   switch (parseGlobalEvent(message)) {
     case GlobalEvent.GameStateChanged:
       gameState = parseGameState(message);
-      console.log('GameState:', gameState);
       break;
     default:
       switch (gameState) {
@@ -34,7 +33,7 @@ client.addListener(async (message: string) => {
                 client.send('developer 1');
                 client.send('con_filter_enable 2');
                 client.send(`con_filter_text "${translationKey}"`);
-                client.send(`"${translatedPlayerMessage}"`);
+                client.send(`echo "${translatedPlayerMessage}"`);
               }
               break;
             case MatchEvent.PlayerConnected:
