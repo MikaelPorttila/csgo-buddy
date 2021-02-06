@@ -4,7 +4,6 @@
   "description": "A buddy for csgo",
   "main": "dist/index.js",
   "dependencies": {
-    "langdetect": "^0.2.1"
   },
   "devDependencies": {
     "@types/node": "^14.14.25",
