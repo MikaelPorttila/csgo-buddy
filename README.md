@@ -1,8 +1,8 @@
 # CSGO Buddy
-Node application that talks and listens to source engine games
+Makes your favorite ESport title a little bit better. 
 
 ## Prerequisite
-- Node.js installed.
+- Node.js installed
 - CSGO Launch option: 
 ```
 -netconport 1337
