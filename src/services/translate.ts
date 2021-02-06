@@ -20,8 +20,8 @@ export async function translate(
       res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         const response = (JSON.parse(data) as [[[string, string]],null, string, null]);
-        const [translation, ignore, language, misc] = response;
-        const [engText, orgText] = translation[0];
+        const [translation, _, language, __] = response;
+        const [engText, originalText] = translation[0];
         const result = new Translation(language as LanguageIso, engText);
         translationCache[message] = result;
         resolve(result);
