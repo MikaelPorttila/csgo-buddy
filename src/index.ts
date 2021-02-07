@@ -34,8 +34,8 @@ const argv = arg({
   "-l": "--lang",
 });
 
-const port = (argv[CommandArg.Port] as number) || 1337;
-const host = (argv[CommandArg.Host]) || "127.0.0.1";
+const port = argv[CommandArg.Port] || 1337;
+const host = argv[CommandArg.Host] || "127.0.0.1";
 const lang = argv[CommandArg.Language];
 const skipLanguages: { [id: string]: boolean } = {};
 
