@@ -3,5 +3,5 @@
   "watch": ["src"],
   "ext": "ts,json",
   "ignore": ["src/**/*.spec.ts"],
-  "exec": "ts-node ./src/index.ts"
+  "exec": "ts-node ./src/index.ts --port 1337 --host 127.0.0.1"
 }

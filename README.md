@@ -17,6 +17,14 @@ Makes your favorite ESport title a little bit better.
 npx csgo-buddy@latest
 ```
 
+## Command line options
+```
+Commands:
+    --lang      Ignore translation of these languages   [default: en,sv,da,no]
+    --port      Change port                             [default: 1337       ]
+    --host      Change host                             [default: 127.0.0.1  ] 
+```
+
 Features:
  - Chat translation to English
 

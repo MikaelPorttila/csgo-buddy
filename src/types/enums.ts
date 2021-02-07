@@ -9,3 +9,9 @@ export enum LanguageIso {
   Danish = 'da',
   Norwegian = 'no'
 }
+
+export enum CommandArg {
+  Language = '--lang',
+  Port = '--port',
+  Host = '--host'
+}
