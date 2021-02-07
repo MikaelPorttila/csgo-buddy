@@ -1,6 +1,5 @@
 export enum MatchEvent {
   Unknown = '',
-  Message = ' : ',
   PlayerConnected = 'connected.',
   PlayerDisconnected = 'disconnected.',
   DamageGiven = 'Damage Given to',
@@ -17,9 +16,10 @@ export enum GlobalEvent {
   GameStateChanged = 'ChangeGameUIState',
 }
 
+export type EventValue = string | string[] | null;
 export class EventWrapper<T extends MatchEvent | LobbyEvent | GlobalEvent> {
   constructor(
     public event: T,
-    public value: string | string[]
+    public value: EventValue
   ) {}
 }

@@ -1,8 +1,8 @@
-import { MatchEvent, GlobalEvent, EventWrapper } from '../types';
+import { MatchEvent, GlobalEvent, EventWrapper, EventValue } from '../types';
 
 export function parseMatchEvent(message: string): EventWrapper<MatchEvent> {
   let event = MatchEvent.Unknown;
-  let args: string | string[] = '';
+  let args: EventValue = null;
   if (message.endsWith(MatchEvent.PlayerConnected)) {
     event = MatchEvent.PlayerConnected;
     args = message
@@ -24,19 +24,26 @@ export function parseMatchEvent(message: string): EventWrapper<MatchEvent> {
       .split(' - ');
     const [damage, numberOfHits] = hit.split('in').map((x) => x.trim());
     args = [playerName, damage, numberOfHits];
-  } else if (message.indexOf(MatchEvent.Message) !== -1) {
-    event = MatchEvent.Message;
-    args = message.split(MatchEvent.Message);
   }
 
   const result = new EventWrapper<MatchEvent>(event, args);
   return result;
 }
 
-export function parseGlobalEvent(message: string): GlobalEvent {
+export function parseGlobalEvent(message: string): EventWrapper<GlobalEvent> {
+  let event = GlobalEvent.Unknown;
+  let args: EventValue = null;
+
   if (message.startsWith(GlobalEvent.GameStateChanged)) {
-    return GlobalEvent.GameStateChanged;
+    event = GlobalEvent.GameStateChanged;
+    args = message.substr(GlobalEvent.GameStateChanged.length);
+  } else if (message.indexOf(GlobalEvent.Message) !== -1) {
+    event = GlobalEvent.Message;
+    args = message.split(GlobalEvent.Message);
   } else {
-    return GlobalEvent.Unknown;
+    event = GlobalEvent.Unknown;
   }
+
+  const result = new EventWrapper<GlobalEvent>(event, args);
+  return result;
 }

@@ -27,43 +27,41 @@ let gameState = GameState.Initial;
 // TODO: port and/or host as parameters.
 const client = new Client(1337, '127.0.0.1');
 client.addListener(async (message: string) => {
-  switch (parseGlobalEvent(message)) {
+  const globalEvent = parseGlobalEvent(message); 
+  switch (globalEvent.event) {
     case GlobalEvent.GameStateChanged:
-      gameState = parseGameState(message);
+      gameState = parseGameState(globalEvent.value as string);
+      break;
+    case GlobalEvent.Message:
+      const [player, msg] = (globalEvent.value as string[]);
+      const { text, language } = await translate(LanguageIso.English, msg);
+
+      if (!skipLanguages[language]) {
+        const translationKey = '[msg]';
+        const translatedPlayerMessage = `${translationKey} ${player}: ${text}`;
+        console.log(translatedPlayerMessage);
+        client.send(
+          'developer 1',
+          'con_filter_enable 2',
+          `con_filter_text "${translationKey}"`,
+          `echo "${translatedPlayerMessage}"`
+        );
+      }
       break;
     default:
+      // disable match event parsing for now.
+      break;
       switch (gameState) {
         case GameState.Match:
           const matchEvent = parseMatchEvent(message);
           switch (matchEvent.event) {
-            case MatchEvent.Message:
-              const [playerName, playerMessage] = matchEvent.value;
-              const translation = await translate(
-                LanguageIso.English,
-                playerMessage
-              );
-              if (translation && !skipLanguages[translation.language]) {
-                const translationKey = '[msg]';
-                const translatedPlayerMessage = `${translationKey} ${playerName}: ${translation.text}`;
-                console.log(translatedPlayerMessage);
-                client.send(
-                  'developer 1',
-                  'con_filter_enable 2',
-                  `con_filter_text "${translationKey}"`,
-                  `echo "${translatedPlayerMessage}"`
-                );
-              }
-              break;
             case MatchEvent.PlayerConnected:
               // todo: Do something fun with this.
-              // console.log('player connected:', matchEvent.value);
               break;
             case MatchEvent.PlayerDisconnected:
               // todo: Do something fun with this.
-              // console.log('Player disconnected:', matchEvent.value);
               break;
             default:
-              // todo: Handle unmapped match events
               break;
           }
           break;
