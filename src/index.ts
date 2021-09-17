@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 import {
   CommandArg,
-  GameState,
   GlobalEvent,
   LanguageIso,
-  MatchEvent,
 } from "./types";
-import { parseGameState, parseGlobalEvent, parseMatchEvent } from "./parsers";
+import { parseGlobalEvent } from "./parsers";
 import { Client, translate } from "./services";
 import arg from "arg";
 
@@ -52,17 +50,12 @@ for (
   skipLanguages[language] = true;
 }
 
-let gameState = GameState.Initial;
-
 const client = new Client(port, host);
 client.addListener(async (message: string) => {
   const globalEvent = parseGlobalEvent(message);
   switch (globalEvent.event) {
-    case GlobalEvent.GameStateChanged:
-      gameState = parseGameState(globalEvent.value as string);
-      break;
-    case GlobalEvent.Message:
-      const [player, msg] = (globalEvent.value as string[]);
+    case GlobalEvent.Message: {
+      const [player, msg] = globalEvent.value as string[];
       const { text, language } = await translate(LanguageIso.English, msg);
 
       if (!skipLanguages[language]) {
@@ -77,25 +70,7 @@ client.addListener(async (message: string) => {
         );
       }
       break;
-    default:
-      // disable match event parsing for now.
-      break;
-      switch (gameState) {
-        case GameState.Match:
-          const matchEvent = parseMatchEvent(message);
-          switch (matchEvent.event) {
-            case MatchEvent.PlayerConnected:
-              // todo: Do something fun with this.
-              break;
-            case MatchEvent.PlayerDisconnected:
-              // todo: Do something fun with this.
-              break;
-            default:
-              break;
-          }
-          break;
-      }
-      break;
+    }
   }
 });
 
